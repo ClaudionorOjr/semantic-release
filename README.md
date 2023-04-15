@@ -91,3 +91,14 @@ Porém, se adicionados novos plugins, o arquivo de configuração sobescreve o p
 Por padrão o semantic-release reconhece a branch 'master', caso em seu repostório seja 'main', devemos incluí-la no `.releaserc.json` da forma como está acima;
 
 É necessário criar o arquivo de CI para executar o semantic-release. Nesse caso estou utilizando o Github Actions. Veja o arquivo em `.github/workflows/release.yml`.
+
+#### Prereleases
+
+É possível configurar o **semantic-release** para aceitar branchs de pré-lançamento, como versões 'alpha' ou 'beta'.
+Primeiro é necessário alterar o arquivo `.releaserc.json`, adicionando as outras branchs e indicando que está corresponde a uma branch de prerelease:
+
+```json
+{
+  "branches": ["main", { "name": "alpha", "prerelease": true }]
+}
+```
