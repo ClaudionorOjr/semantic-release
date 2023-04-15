@@ -20,20 +20,26 @@ Para executar o **commitizen** é necessário criar um script no `package.json`:
 }
 ```
 
-Após, rodar `npm run commit`.  
-Porém há uma alternativa para executar o **commitizen** com `git commit`, utilizando _git hooks_. Atualize `.git/hooks/prepare-commit-msg` com o seguinte código:
+Após, rodar `npm run commit`.
+
+#### Commitizen com git commit
+
+Há uma alternativa para executar o **commitizen** com `git commit`, utilizando _git hooks_. Atualize `.git/hooks/prepare-commit-msg` com o seguinte código:
+
+> Uma alternativa mais amigável, utilizando um comando que já estamos familiarizados. Assim podemos descartar a opção de rodar um script.
 
 ```sh
 #!/bin/bash
 exec < /dev/tty && node_modules/.bin/cz --hook || true
 ```
 
-> Uma alternativa mais amigável, utilizando um comando que já estamos familiarizados. Assim podemos descartar a opção de rodar um script.
+> Note: O Commitizen não execute corretamente no Windows utilizando _powershell_ e _cmd_. O terminal interativo não funciona bem. A Alternativa é utilizar WSL e executar o comando no terminal linux.
 
 ---
 
 - ### [Husky](https://typicode.github.io/husky/#/)
-  > Note: O husky é opcional. Ele cria hooks para o git. É uma alternativa caso deseje executar o commitizen através do `git commit`.
+
+> Note: O husky é opcional. Ele cria hooks para o git. É uma alternativa caso deseje executar o commitizen através do `git commit`.
 
 ```sh
 $ npm i husky -D
@@ -83,3 +89,5 @@ Adicionar o arquivo `.releaserc.json` contendo:
 Os plugins `"@semantic-release/commit-analyzer"`, `"@semantic-release/release-notes-generator"`, `"@semantic-release/npm"`, `"@semantic-release/github"` já vem pré-instalados junto ao **semantic-release**;  
 Porém, se adicionados novos plugins, o arquivo de configuração sobescreve o padrão, por isso é preciso incluí-los também no `.releaserc.json`;  
 Por padrão o semantic-release reconhece a branch 'master', caso em seu repostório seja 'main', devemos incluí-la no `.releaserc.json` da forma como está acima;
+
+É necessário criar o arquivo de CI para executar o semantic-release. Nesse caso estou utilizando o Github Actions. Veja o arquivo em `.github/workflows/release.yml`.
