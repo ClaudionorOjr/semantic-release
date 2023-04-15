@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/ClaudionorOjr/semantic-release/compare/v1.0.0...v1.1.0) (2023-04-15)
+
+
+### Features
+
+* **readme:** update readme ([1d5829f](https://github.com/ClaudionorOjr/semantic-release/commit/1d5829fbe4bfc72293e674ee3da81c138034768f))
+
 # 1.0.0 (2023-04-15)
 
 
