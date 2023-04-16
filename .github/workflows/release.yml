@@ -1,6 +1,12 @@
 name: Release
 
-on: [push]
+on:
+  workflow_dispatch:
+    branches:
+      - main
+  push:
+    branches:
+      - alpha
 
 jobs:
   release:
