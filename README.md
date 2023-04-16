@@ -92,10 +92,10 @@ Por padrão o semantic-release reconhece a branch 'master', caso em seu repostó
 
 É necessário criar o arquivo de CI para executar o semantic-release. Nesse caso estou utilizando o Github Actions. Veja o arquivo em `.github/workflows/release.yml`.
 
-#### Prereleases
+#### Pre-release
 
-É possível configurar o **semantic-release** para aceitar branchs de pré-lançamento, como versões 'alpha' ou 'beta'.
-Primeiro é necessário alterar o arquivo `.releaserc.json`, adicionando as outras branchs e indicando que está corresponde a uma branch de prerelease:
+É possível configurar o **semantic-release** para aceitar branches de pré-lançamento, como versões 'alpha' ou 'beta'.
+Primeiro é necessário alterar o arquivo `.releaserc.json`, adicionando as outras branches e indicando que esta corresponde a uma branch de pre-release:
 
 ```json
 {
