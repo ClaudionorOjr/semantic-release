@@ -1,9 +1,13 @@
 name: Release
 
 on:
-  repository_dispatch:
+  workflow_run:
+    workflows: [test-workflow]
     types:
-      - test-workflow
+      - completed
+  # repository_dispatch:
+  #   types:
+  #     - test-workflow
 
 jobs:
   release:
