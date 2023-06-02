@@ -29,6 +29,8 @@ jobs:
 
   trigger-release:
     name: Trigger Release Workflow
+    permissions:
+      contents: write
     needs: test-workflow
     if: ${{ needs.test-workflow.result == 'success' }}
 
