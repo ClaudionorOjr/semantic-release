@@ -3,7 +3,7 @@ name: Release
 on:
   repository_dispatch:
     types:
-      - trigger-release
+      - test-workflow
 
 jobs:
   release:
