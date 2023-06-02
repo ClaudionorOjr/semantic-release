@@ -2,12 +2,12 @@ name: Release
 
 on:
   workflow_run:
-    workflows: [test-workflow]
+    workflows: [trigger-release]
     types:
       - completed
   # repository_dispatch:
   #   types:
-  #     - test-workflow
+  #     - trigger-release
 
 jobs:
   release:
