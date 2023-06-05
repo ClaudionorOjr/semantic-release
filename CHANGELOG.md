@@ -1,3 +1,15 @@
+# [2.0.0-alpha.1](https://github.com/ClaudionorOjr/semantic-release/compare/v1.3.0-alpha.1...v2.0.0-alpha.1) (2023-06-05)
+
+
+### Continuous Integration
+
+* **release:** workflow dispatch ([2085f95](https://github.com/ClaudionorOjr/semantic-release/commit/2085f951613e15617005fc8539d2be4f101cad31))
+
+
+### BREAKING CHANGES
+
+* **release:** the release will only run after the completion of the 'test-workflow' workflow
+
 # [1.3.0-alpha.1](https://github.com/ClaudionorOjr/semantic-release/compare/v1.2.0...v1.3.0-alpha.1) (2023-04-16)
 
 
