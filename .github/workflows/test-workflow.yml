@@ -1,9 +1,7 @@
 name: Test Workflow
 
 on:
-  push:
-    branches:
-      - alpha
+  workflow_call:
 
 jobs:
   test-workflow:
@@ -26,6 +24,15 @@ jobs:
 
       - run: |
           echo "Workflow Run ActionStatus: ${{ job.status }}."
+
+      - name: Set Test Result
+        id: set_result
+        run: |
+          if [ $? -eq 0 ]; then
+            echo "::set-output name=result::success"
+          else
+            echo "::set-output name=result::failure"
+          fi
 
   # trigger-release:
   #   name: Trigger Release Workflow

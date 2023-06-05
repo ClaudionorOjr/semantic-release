@@ -1,10 +1,13 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: [trigger-release]
-    types:
-      - completed
+  push:
+    branches:
+      - alpha
+  # workflow_run:
+  #   workflows: [trigger-release]
+  #   types:
+  #     - completed
   # repository_dispatch:
   #   types:
   #     - trigger-release
@@ -20,6 +23,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Run Test Workflow
+        id: test_workflow
+        uses: ./.github/workflows/test-worklow.yml
+
       - name: Debug Workflow Run
         run: |
           echo "Workflow ${{ github.workflow }}"
@@ -36,7 +43,17 @@ jobs:
           node-version: 18
           cache: "npm"
 
-      - run: npm ci
-      - run: npx semantic-release
+      - name: Handle Test Workflow Result
+        if: steps.test_workflow.outputs.result == 'success'
+        run: |
+          npm ci
+          npx semantic-release
+          echo "Test Workflow succeeded"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Handle Test Workflow Failure
+        if: steps.test_workflow.outputs.result != 'success'
+        run: |
+          echo "Test Workflow failed"
+          exit 1
