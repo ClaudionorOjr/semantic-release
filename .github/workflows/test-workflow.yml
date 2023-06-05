@@ -27,21 +27,21 @@ jobs:
       - run: |
           echo "Workflow Run ActionStatus: ${{ job.status }}."
 
-  # trigger-release:
-  #   name: Trigger Release Workflow
-  #   permissions:
-  #     contents: write
-  #   needs: test-workflow
-  #   if: ${{ needs.test-workflow.result == 'success' }}
+  trigger-release:
+    name: Trigger Release Workflow
+    permissions:
+      contents: write
+    needs: test-workflow
+    if: ${{ needs.test-workflow.result == 'success' }}
 
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Trigger Release Workflow
-  #       uses: peter-evans/repository-dispatch@v2
-  #       with:
-  #         token: ${{ secrets.GITHUB_TOKEN }}
-  #         repository: ${{ github.repository }}
-  #         event-type: release.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Release Workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: release.yml
 
   # - name: Trigger Release Workflow
   #   if: ${{ success() }}
