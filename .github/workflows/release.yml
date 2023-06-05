@@ -25,10 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run Test Workflow
-        id: test_workflow
-        uses: ./.github/workflows/test-workflow.yml
-
       - name: Debug Workflow Run
         run: |
           echo "Workflow ${{ github.workflow }}"
@@ -43,6 +39,10 @@ jobs:
         with:
           node-version: 18
           cache: "npm"
+
+      - name: Run Test Workflow
+        id: test_workflow
+        uses: ./.github/workflows/test-workflow.yml
 
       - name: Handle Test Workflow Result
         if: steps.test_workflow.outputs.result == 'success'
