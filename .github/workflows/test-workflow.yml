@@ -1,4 +1,4 @@
-name: Test Workflow
+name: CI B
 
 on:
   push:
@@ -6,47 +6,28 @@ on:
       - alpha
 
 jobs:
-  test-workflow:
-    name: Test Workflow
+  ci-b-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Debug Workflow Run
-        run: |
-          echo "Workflow ${{ github.workflow }}"
-          echo "Workflow Run ID: ${{ github.run_id }}"
-          echo "Workflow Run Ref: ${{ github.ref }}"
-          echo "Workflow Run Base Ref: ${{ github.base_ref }}"
-          echo "Workflow Run Repositoy: ${{ github.repository }}"
-          echo "Workflow Run Event: ${{ github.event }}"
-          echo "Workflow Run Event Name: ${{ github.event_name }}"
+      # Adicione aqui os passos necessários para executar o fluxo de trabalho de CI 'B'
 
-      - run: |
-          echo "Workflow Run ActionStatus: ${{ job.status }}."
-
-  trigger-release:
-    name: Trigger Release Workflow
+  notify-a-job:
+    needs: ci-b-job
     permissions:
       contents: write
-    needs: test-workflow
-    if: ${{ needs.test-workflow.result == 'success' }}
-
+    if: ${{ needs.ci-b-job.result == 'success' }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Trigger Release Workflow
+      - name: Notify CI A
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          event-type: release.yml
+          event-type: workflow-done
 
-  # - name: Trigger Release Workflow
-  #   if: ${{ success() }}
-  #   uses: peter-evans/repository-dispatch@v2
-  #   with:
-  #     token: ${{ secrets.GITHUB_TOKEN }}
-  #     repository: ${{ github.repository }}
-  #     event-type: release.yml
+      - run: echo "Workflow B bem-sucedido!"
