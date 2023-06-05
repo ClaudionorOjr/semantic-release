@@ -17,6 +17,8 @@ jobs:
 
   notify-a-job:
     needs: ci-b-job
+    permissions:
+      contents: write
     if: ${{ needs.ci-b-job.result == 'success' }}
     runs-on: ubuntu-latest
 
